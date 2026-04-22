@@ -99,7 +99,7 @@ def export_to_onnx(model, save_path):
             model=model_for_export,
             input_signature=[input_spec],
             output_path=save_path,
-            opset=13,
+            opset=18,
         )
         return save_path
     except Exception as e:
@@ -280,7 +280,7 @@ def train_with_params(
                 model=model_for_export,
                 input_signature=[input_spec],
                 output_path=onnx_path,
-                opset=13,
+                opset=18,
             )
             mlflow.log_artifact(onnx_path, "onnx_model")
             print(f"[INFO] ONNX model saved: {onnx_path}")
