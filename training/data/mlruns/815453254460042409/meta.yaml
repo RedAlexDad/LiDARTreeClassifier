@@ -1,0 +1,7 @@
+artifact_location: file:///home/redalexdad/GitHub/LiDARTreeClassifier/training/data/mlruns/815453254460042409
+creation_time: 1776869084744
+experiment_id: '815453254460042409'
+last_update_time: 1776869084744
+lifecycle_stage: active
+name: LiDAR-Tree-PointNet
+workspace: default

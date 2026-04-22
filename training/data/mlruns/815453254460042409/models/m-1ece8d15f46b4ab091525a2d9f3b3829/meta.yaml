@@ -1,0 +1,10 @@
+artifact_location: file:///home/redalexdad/GitHub/LiDARTreeClassifier/training/data/mlruns/815453254460042409/models/m-1ece8d15f46b4ab091525a2d9f3b3829/artifacts
+creation_timestamp: 1776878935763
+experiment_id: '815453254460042409'
+last_updated_timestamp: 1776878945765
+model_id: m-1ece8d15f46b4ab091525a2d9f3b3829
+model_type: null
+name: model
+source_run_id: 4569272ae00946eca428eea3499dbe33
+status: 2
+status_message: null

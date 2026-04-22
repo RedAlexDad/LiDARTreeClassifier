@@ -1,0 +1,7 @@
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    ports: ["5000:5000"]
+    volumes:
+      - ./training/data/mlruns:/mlflow/data
+    command: mlflow server --backend-store-uri /mlflow/data --host 0.0.0.0
