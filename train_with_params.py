@@ -8,7 +8,7 @@ import mlflow
 import keras
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 import numpy as np
 import json
 import pandas as pd
@@ -265,6 +265,12 @@ def train_with_params(
                     f"f1_class_{i}_{class_names[i]}": float(f1),
                 }
             )
+
+        report = classification_report(y_test, preds, target_names=class_names)
+        report_path = f"training/data/models/{run_id}_classification_report.txt"
+        with open(report_path, "w") as f:
+            f.write(report)
+        mlflow.log_artifact(report_path, "classification_report")
 
         model_path = f"training/data/models/{run_id}.keras"
         model.save(model_path)
