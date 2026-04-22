@@ -7,6 +7,7 @@ import tensorflow as tf
 import keras
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 
 from models.pointnet import OrthogonalRegularizer
 from scripts.load_data import load_dataset
@@ -20,34 +21,31 @@ def visualize_predictions(model_path: str, num_samples: int = 8):
         model_path, custom_objects={"OrthogonalRegularizer": OrthogonalRegularizer}
     )
 
-    _, test_ds = load_dataset()
-    data = test_ds.unbatch().take(num_samples)
+    X, Y, _ = load_dataset()
+    indices = np.random.choice(len(X), num_samples, replace=False)
 
     fig = plt.figure(figsize=(15, 15))
-    points_batch = []
-    labels_batch = []
-    preds_batch = []
+    points_list = []
+    labels_list = []
+    preds_list = []
 
-    for i, (points, labels) in enumerate(data):
-        points_batch.append(points.numpy())
-        labels_batch.append(labels.numpy())
+    for idx in indices:
+        points = X[idx]
+        label = Y[idx]
+        points_list.append(points)
+        labels_list.append(label)
 
         pred = model.predict(points[tf.newaxis, ...], verbose=0)
         pred = tf.math.argmax(pred, -1).numpy()[0]
-        preds_batch.append(pred)
+        preds_list.append(pred)
 
-    points_batch = tf.stack(points_batch).numpy()
+    points_arr = np.array(points_list)
 
     for i in range(num_samples):
         ax = fig.add_subplot(4, 2, i + 1, projection="3d")
-        ax.scatter(
-            points_batch[i, :, 0],
-            points_batch[i, :, 1],
-            points_batch[i, :, 2],
-            s=5,
-        )
+        ax.scatter(points_arr[i, :, 0], points_arr[i, :, 1], points_arr[i, :, 2], s=5)
         ax.set_title(
-            f"pred: {CLASS_MAP[preds_batch[i]]}, label: {CLASS_MAP[labels_batch[i]]}"
+            f"pred: {CLASS_MAP[preds_list[i]]}, label: {CLASS_MAP[labels_list[i]]}"
         )
         ax.set_axis_off()
 
