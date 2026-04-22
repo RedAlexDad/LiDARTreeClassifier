@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
 import itertools
 from scripts.train import train_single
 from scripts.load_data import load_dataset
