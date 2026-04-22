@@ -1,0 +1,20 @@
+artifact_path: file:///home/redalexdad/GitHub/LiDARTreeClassifier/training/data/mlruns/851692961374286149/models/m-d37f70f5273249b683f37e7fee048efd/artifacts
+flavors:
+  keras:
+    data: data
+    keras_backend: tensorflow
+    keras_version: 3.13.2
+    save_exported_model: false
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.keras
+    python_version: 3.12.3
+mlflow_version: 3.11.1
+model_id: m-d37f70f5273249b683f37e7fee048efd
+model_size_bytes: 9219014
+model_uuid: m-d37f70f5273249b683f37e7fee048efd
+prompts: null
+run_id: a9ec9e459f864cc7a343cdd4b15ec6c1
+utc_time_created: '2026-04-22 18:47:48.610368'
