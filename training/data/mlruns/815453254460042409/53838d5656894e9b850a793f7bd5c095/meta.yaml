@@ -1,0 +1,14 @@
+artifact_uri: file:///home/redalexdad/GitHub/LiDARTreeClassifier/training/data/mlruns/815453254460042409/53838d5656894e9b850a793f7bd5c095/artifacts
+end_time: 1776881559250
+entry_point_name: ''
+experiment_id: '815453254460042409'
+lifecycle_stage: active
+run_id: 53838d5656894e9b850a793f7bd5c095
+run_name: ep3_bs32_lr0.001_Adam_drop0.3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1776881494105
+status: 3
+tags: []
+user_id: redalexdad

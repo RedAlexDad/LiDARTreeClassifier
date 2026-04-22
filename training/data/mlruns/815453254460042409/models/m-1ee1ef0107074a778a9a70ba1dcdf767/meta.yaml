@@ -1,0 +1,10 @@
+artifact_location: file:///home/redalexdad/GitHub/LiDARTreeClassifier/training/data/mlruns/815453254460042409/models/m-1ee1ef0107074a778a9a70ba1dcdf767/artifacts
+creation_timestamp: 1776881302536
+experiment_id: '815453254460042409'
+last_updated_timestamp: 1776881307247
+model_id: m-1ee1ef0107074a778a9a70ba1dcdf767
+model_type: null
+name: keras_model
+source_run_id: a867964666a0477dbe7193d7f5680607
+status: 2
+status_message: null
