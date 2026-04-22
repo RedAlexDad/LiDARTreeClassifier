@@ -31,7 +31,7 @@ def export_onnx(run_id: str, output_dir: str = "training/data/models"):
     model_proto, _ = tf2onnx.convert.from_keras(
         keras_model,
         input_signature=input_spec,
-        opset_version=13,
+        opset=13,
     )
 
     with open(onnx_path, "wb") as f:

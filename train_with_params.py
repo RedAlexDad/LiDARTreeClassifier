@@ -22,7 +22,10 @@ from models.pointnet import build_pointnet
 from scripts.load_data import load_dataset
 from scripts.mlflow_setup import setup_mlflow
 
-mlflow.set_system_metrics(sampling_interval=1)
+try:
+    mlflow.set_system_metrics(sampling_interval=1)
+except AttributeError:
+    pass
 
 
 def plot_confusion_matrix(cm, class_names, save_path):
@@ -92,8 +95,8 @@ def export_to_onnx(model, save_path):
     input_spec = tf.TensorSpec(shape=(None, 4096, 3), dtype=tf.float32)
     try:
         model_for_export = tf.keras.Model(inputs=model.input, outputs=model.output)
-        onnx_model = tf2onnx.convert(
-            keras_model=model_for_export,
+        onnx_model = tf2onnx.convert.from_keras(
+            model=model_for_export,
             input_signature=[input_spec],
             output_path=save_path,
             opset=13,
@@ -273,8 +276,8 @@ def train_with_params(
             onnx_path = f"training/data/models/{run_id}.onnx"
             input_spec = tf.TensorSpec(shape=(None, 4096, 3), dtype=tf.float32)
             model_for_export = tf.keras.Model(inputs=model.input, outputs=model.output)
-            tf2onnx.convert(
-                keras_model=model_for_export,
+            tf2onnx.convert.from_keras(
+                model=model_for_export,
                 input_signature=[input_spec],
                 output_path=onnx_path,
                 opset=13,
