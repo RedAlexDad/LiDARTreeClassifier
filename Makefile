@@ -20,7 +20,7 @@ train-default:
 	python3 train_with_params.py --epochs=20 --batch-size=32 --lr=0.001 --optimizer=Adam --dropout=0.3
 
 train:
-	python3 train_with_params.py --epochs=$(EPOCHS) --batch-size=$(BATCH_SIZE) --lr=$(LR) --optimizer=$(OPTIMIZER) --dropout=$(DROPOUT)
+	python3 train_with_params.py --epochs=$(or $(EPOCHS),20) --batch-size=$(or $(BATCH_SIZE),32) --lr=$(or $(LR),0.001) --optimizer=$(or $(OPTIMIZER),Adam) --dropout=$(or $(DROPOUT),0.3)
 
 export-onnx:
 	python3 -m $(TRAINING_DIR).scripts.export_onnx --run-id=$(RUN_ID)
