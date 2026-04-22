@@ -1,0 +1,9 @@
+              precision    recall  f1-score   support
+
+      Береза       0.31      0.43      0.36        21
+         Ель       0.82      0.82      0.82        49
+       Сосна       0.58      0.44      0.50        32
+
+    accuracy                           0.62       102
+   macro avg       0.57      0.56      0.56       102
+weighted avg       0.64      0.62      0.62       102

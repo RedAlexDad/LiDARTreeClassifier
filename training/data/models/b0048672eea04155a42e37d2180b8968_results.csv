@@ -1,0 +1,5 @@
+metric,value
+final_train_acc,0.7425742745399475
+final_val_acc,0.6176470518112183
+best_val_acc,0.6372548937797546
+best_epoch,18.0

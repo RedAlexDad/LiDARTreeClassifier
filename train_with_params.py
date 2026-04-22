@@ -174,12 +174,6 @@ def train_with_params(
         )
 
         callbacks = [
-            keras.callbacks.EarlyStopping(
-                monitor="val_loss",
-                patience=5,
-                restore_best_weights=True,
-                verbose=1,
-            ),
             keras.callbacks.TensorBoard(
                 log_dir=f"training/data/models/{run_id}_tb",
                 histogram_freq=0,
