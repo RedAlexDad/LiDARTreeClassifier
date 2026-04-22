@@ -15,6 +15,7 @@ help:
 	@echo "Примеры:"
 	@echo "  make train EPOCHS=30 BATCH_SIZE=16 LR=0.001"
 	@echo "  make train EPOCHS=30 BATCH_SIZE=64 LR=0.005 OPTIMIZER=SGD DROPOUT=0.5"
+	@echo "  make train EPOCHS=50 BATCH_SIZE=64  # автоопределение GPU"
 
 train-default:
 	python3 train_with_params.py --epochs=20 --batch-size=32 --lr=0.001 --optimizer=Adam --dropout=0.3

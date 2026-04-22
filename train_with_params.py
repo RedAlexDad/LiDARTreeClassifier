@@ -333,8 +333,24 @@ if __name__ == "__main__":
     )
     parser.add_argument("--dropout", type=float, default=0.3, help="Dropout rate")
     parser.add_argument("--test-size", type=float, default=0.2, help="Test size ratio")
+    parser.add_argument(
+        "--no-gpu", action="store_true", help="Disable GPU, use CPU only"
+    )
 
     args = parser.parse_args()
+
+    gpus = tf.config.list_physical_devices("GPU")
+    if args.no_gpu:
+        tf.config.set_visible_devices([], "GPU")
+        print("[INFO] GPU disabled, using CPU")
+    elif gpus:
+        try:
+            tf.config.experimental.set_memory_growth(gpus[0], True)
+            print(f"[INFO] Using GPU: {gpus[0]}")
+        except RuntimeError as e:
+            print(f"[WARN] GPU config error: {e}")
+    else:
+        print("[INFO] No GPU found, using CPU")
 
     train_with_params(
         epochs=args.epochs,
