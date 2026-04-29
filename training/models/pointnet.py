@@ -12,10 +12,23 @@ class OrthogonalRegularizer(keras.regularizers.Regularizer):
         self.eye = tf.eye(num_features)
 
     def __call__(self, x):
+        # x = tf.reshape(x, (-1, self.num_features, self.num_features))
+        # xxt = tf.tensordot(x, x, axes=(2, 2))
+        # xxt = tf.reshape(xxt, (-1, self.num_features, self.num_features))
+        # return tf.reduce_sum(self.l2reg * tf.square(xxt - self.eye))
+
+        # Совет по исправлению NaN
+        # Если данные в порядке, попробуйте обновить ячейку с `OrthogonalRegularizer`, добавив небольшое число (epsilon) 
+        # или ограничив значения, а также уменьшите `LEARNING_RATE` в ячейке с гиперпараметрами.
+
+        # **Что было изменено в регуляризаторе:**
+        # 1. **Переход на `tf.matmul`**: Обеспечивает более стабильное и оптимизированное перемножение матриц для батчей.
+        # 2. **Использование `reduce_mean` вместо `reduce_sum`**: Позволяет нормализовать штраф, 
+        # делая его независимым от размера батча и количества входных данных, что предотвращает взрыв градиентов.
         x = tf.reshape(x, (-1, self.num_features, self.num_features))
-        xxt = tf.tensordot(x, x, axes=(2, 2))
-        xxt = tf.reshape(xxt, (-1, self.num_features, self.num_features))
-        return tf.reduce_sum(self.l2reg * tf.square(xxt - self.eye))
+        xxt = tf.matmul(x, x, transpose_b=True)
+        reg = tf.reduce_mean(tf.square(xxt - self.eye))
+        return self.l2reg * reg
 
     def get_config(self):
         return {"num_features": self.num_features, "l2reg": self.l2reg}
